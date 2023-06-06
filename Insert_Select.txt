@@ -7,24 +7,24 @@ CREATE TABLE INGREDIENT (
   );
 
   INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
-  VALUES ("Eggs", false, true, false, true);
+  VALUES ('Eggs', false, true, false, true);
 
   INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
-  VALUES ("Bread", false, true, true, false);
+  VALUES ('Bread', false, true, true, false);
 
   INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
-  VALUES ("Beef Patty", false, false, false, true);
+  VALUES ('Beef Patty', false, false, false, true);
 
   INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
-  VALUES ("Lettuce", false, true, true, true);
+  VALUES ('Lettuce', false, true, true, true);
 
   INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
-  VALUES ("Yoghurt", true, true, false, true);
+  VALUES ('Yoghurt', true, true, false, true);
 
 
 
   SELECT NAME FROM INGREDIENT;
-  SELECT NAME, VEGAN FROM INGREDIENT; ---> nella traccia c'è un errore, chiedeva PRICE ma non esiste!
+  SELECT NAME, VEGAN FROM INGREDIENT; ---> nella traccia c'è un errore, chiedeva PRICE ma non esiste!q
   SELECT * FROM INGREDIENT
   ORDER BY NAME;
   SELECT * FROM INGREDIENT
