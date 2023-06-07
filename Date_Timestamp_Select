@@ -1,0 +1,99 @@
+CREATE TABLE MEAL (
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+);
+
+CREATE TABLE INGREDIENT (
+  NAME VARCHAR(255),
+  CONTAINS_LACTOSE BOOLEAN,
+  VEGETARIAN BOOLEAN,
+  VEGAN BOOLEAN,
+  GLUTEN_FREE BOOLEAN
+);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Eggs', false, true, false, true);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Bread', false, true, true, false);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Beef Patty', false, false, false, true);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Lettuce', false, true, true, true);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Yoghurt', true, true, false, true);
+
+INSERT INTO MEAL(NAME, PRICE, CALORIES)
+VALUES ('Spaghetti Bolognese', 12.99, 600),
+('Grilled Chicken Sandwich', 8.99, 400),
+('Pesto Pasta', 10.99, 550),
+('Steak and Mash', 19.99, 800),
+('Sushi Platter', 15.99, 700);
+
+ CREATE TABLE MEAL_ORDER (
+   TIME_MEAL_ORDERED TIMESTAMP,
+   MEAL_NAME VARCHAR(255)
+ );
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (NOW(), 'Spaghetti Bolognese');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 1 HOUR), 'Grilled Chicken Sandwich');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 2 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 3 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 4 HOUR), 'Grilled Chicken Sandwich');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 5 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 6 HOUR), 'Spaghetti Bolognese');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 7 HOUR), 'Pesta Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 8 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 9 HOUR), 'Spaghetti Bolognese');
+
+ CREATE VIEW MEAL_ORDER_WITH_DETAILS AS
+     SELECT MO.*, M.PRICE, M.CALORIES FROM MEAL_ORDER MO, MEAL M
+     WHERE MO.MEAL_NAME = M.NAME;
+
+
+----------------- Inizio esercizi -------------------------
+1)
+
+SELECT
+CONCAT('€', PRICE) AS PRICE_IN_EUROS, # concatena due o più stringhe
+LOWER(MEAL_NAME) AS MEAL_NAME_IN_LOWERCASE, # passa tutto in minuscolo
+UPPER(MEAL_NAME) AS MEAL_NAME_IN_UPPERCASE, # passa tutto in maiuscolo
+TRIM(MEAL_NAME) AS TRIMMED_MEAL_NAME, # dovrebbe togliere gli spazi prima e dopo ma non riesco a scriverlo in maniera corretta
+SUBSTR(MEAL_NAME, 1, 6) AS SIX_LETTERS, # prende le lettere selezionate, in questo caso dalla prima alla sesta
+ROUND(PRICE, 0) AS ROUNDED_PRICES, # arrotonda il numero, il secondo parametro indica le cifre decimali da guardare per arrotondare
+DATE_ADD(NOW(), INTERVAL 1 HOUR) AS ONE_HOUR_FROM_NOW, # aggiunge un dato intervallo di tempo ad una data scelta
+DATE_SUB(NOW(), INTERVAL 1 DAY) AS YESTERDAY, # uguale a quello di prima ma sottrae
+FORMAT(PRICE, 1) AS FORMATTED_PRICES # formatta il numero in base al secondo parametro che indica le cifre decimali consentite
+FROM MEAL_ORDER_WITH_DETAILS;
+
+2)
+
+SELECT
+DATE_SUB(DATE_ADD(NOW(), INTERVAL 10 HOUR), INTERVAL 11 DAY) AS BIRTHDAY_DATE
+FROM MEAL_ORDER_WITH_DETAILS;
+
+# Il mio compleanno è stato lo scorso 28 Maggio!
+
