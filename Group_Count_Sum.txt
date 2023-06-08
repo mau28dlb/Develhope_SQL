@@ -1,0 +1,115 @@
+CREATE TABLE MEAL (
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+);
+
+CREATE TABLE INGREDIENT (
+  NAME VARCHAR(255),
+  CONTAINS_LACTOSE BOOLEAN,
+  VEGETARIAN BOOLEAN,
+  VEGAN BOOLEAN,
+  GLUTEN_FREE BOOLEAN
+);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Eggs', false, true, false, true);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Bread', false, true, true, false);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Beef Patty', false, false, false, true);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Lettuce', false, true, true, true);
+
+INSERT INTO INGREDIENT (NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES ('Yoghurt', true, true, false, true);
+
+INSERT INTO MEAL(NAME, PRICE, CALORIES)
+VALUES ('Spaghetti Bolognese', 12.99, 600),
+('Grilled Chicken Sandwich', 8.99, 400),
+('Pesto Pasta', 10.99, 550),
+('Steak and Mash', 19.99, 800),
+('Sushi Platter', 15.99, 700);
+
+ CREATE TABLE MEAL_ORDER (
+   TIME_MEAL_ORDERED TIMESTAMP,
+   MEAL_NAME VARCHAR(255)
+ );
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (NOW(), 'Spaghetti Bolognese');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 1 HOUR), 'Grilled Chicken Sandwich');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 2 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 3 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 4 HOUR), 'Grilled Chicken Sandwich');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 5 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 6 HOUR), 'Spaghetti Bolognese');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 7 HOUR), 'Pesta Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 8 HOUR), 'Pesto Pasta');
+
+     INSERT INTO MEAL_ORDER (TIME_MEAL_ORDERED, MEAL_NAME)
+     VALUES (DATE_ADD(NOW(), INTERVAL 9 HOUR), 'Spaghetti Bolognese');
+
+ CREATE VIEW MEAL_ORDER_WITH_DETAILS AS
+     SELECT MO.*, M.PRICE, M.CALORIES FROM MEAL_ORDER MO, MEAL M
+     WHERE MO.MEAL_NAME = M.NAME;
+
+------------------------- esercizi -----------------------------
+
+Using a SELECT statement with a GROUP BY clause and COUNT function, retrieve the number of orders for each meal.
+
+SELECT MEAL_NAME,
+COUNT(*) FROM MEAL_ORDER_WITH_DETAILS
+GROUP BY MEAL_NAME;
+
+
+
+Using a SELECT statement with a WHERE clause and SUM function, retrieve the total revenue for all meals that have a price greater than €15.
+
+SELECT SUM(PRICE) FROM MEAL WHERE PRICE > 15;
+
+
+
+Using a SELECT statement with a GROUP BY clause and COUNT function, retrieve the number of meals that have more than 500 calories.
+
+SELECT NAME, CALORIES,
+COUNT(*) AS NUMBER_OF_MEALS
+FROM MEAL WHERE CALORIES > 500
+GROUP BY CALORIES
+
+
+
+Using a SELECT statement with a WHERE clause and SUM function, retrieve the total price for all meals that have a name containing the letter 'S'.
+
+SELECT SUM(PRICE) AS TOTAL_REVENUE_MEALS_WITH_S
+FROM MEAL WHERE LOWER(NAME) LIKE '%s%';
+
+
+
+Using a SELECT statement with a WHERE clause, GROUP BY clause, and COUNT function, retrieve
+the number of orders for each meal that were ordered before '202X-XX-XX 18:00:00' (Replace the Xs with your current date)
+
+SELECT MEAL_NAME, TIME_MEAL_ORDERED,
+COUNT(*) AS TOTAL_ORDERS
+FROM MEAL_ORDER_WITH_DETAILS WHERE TIME_MEAL_ORDERED < '2023-06-08 18:00:00'
+GROUP BY MEAL_NAME
+
