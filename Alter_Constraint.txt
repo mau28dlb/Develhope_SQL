@@ -1,0 +1,17 @@
+alter table ingredient
+modify GLUTEN_FREE BOOLEAN not null;
+
+alter table ingredient
+add constraint unique(NAME);
+
+alter table ingredient
+modify CONTAINS_LACTOSE BOOLEAN not null;
+
+alter table ingredient
+add constraint CHECK(VEGAN IS not NULL);
+
+alter table ingredient
+add constraint CHECK(VEGETARIAN IS not NULL);
+
+# ho aggiunto il constraint CHECK giusto per provarne alcuni diversi anche se probabilmente sarebbe stato più corretto
+usare modify anche per vegan e vegetarian
