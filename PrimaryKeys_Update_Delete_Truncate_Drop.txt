@@ -1,0 +1,65 @@
+1)
+create table CUSTOMER (
+ID INT auto_increment,
+NAME VARCHAR (255),
+AGE INT,
+NATIONALITY VARCHAR (255),
+FAVOURITE_MEAL VARCHAR (255),
+primary key (ID)
+);
+
+2)
+insert into CUSTOMER (NAME, AGE, NATIONALITY, FAVOURITE_MEAL)
+values ('Mauro', 30, 'Italian', 'Pizza');
+
+
+3)
+update CUSTOMER
+set NAME = 'Simona', FAVOURITE_MEAL = 'Latte e biscotti'
+where ID = 2;
+
+update CUSTOMER
+set NAME = 'Federica', NATIONALITY = 'German', FAVOURITE_MEAL = 'Pasta e lenticchie'
+where ID = 3;
+
+4)
+delete from CUSTOMER where ID = 4;
+
+5)
+TRUNCATE CUSTOMER;
+
+---------------------------
+
+Look at the tables below and write which column(s) you think would make a good primary key.
+
+6)
+CREATE TABLE Customers (
+ customer_id INT NOT NULL AUTO_INCREMENT, <----------- come già impostato
+ first_name VARCHAR(255) NOT NULL,
+ last_name VARCHAR(255) NOT NULL,
+ email VARCHAR(255) NOT NULL,
+ PRIMARY KEY (customer_id)
+);
+
+7)
+CREATE TABLE Products (
+ product_name VARCHAR(255) NOT NULL, <----- penso sia la scelta migliore perché la descrizione sarebbe troppo lunga come key ed i prezzi possono ripetersi
+ product_description VARCHAR(255) NOT NULL,
+ product_price DECIMAL(10, 2) NOT NULL,
+ product_quantity INT NOT NULL
+);
+
+8)
+CREATE TABLE Orders (
+ order_id INT NOT NULL AUTO_INCREMENT, <------ sia order che customer sono ID quindi codici univoci
+ customer_id INT NOT NULL, <------
+ expected_arrival_time DATE
+);
+
+9)
+CREATE TABLE Product_Orders (
+ order_id INT NOT NULL AUTO_INCREMENT, <---- questo visto che è un codice ID
+ product_name VARCHAR(255) NOT NULL,
+ total_revenue DOUBLE
+);
+
