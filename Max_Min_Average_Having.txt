@@ -96,7 +96,9 @@ SELECT AVG(CALORIES) FROM MEAL WHERE PRICE > 15
 
 Write a query to select all meals that have the MAX price, using HAVING and MAX()
 
-- non ho capito la consegna
+SELECT NAME, PRICE 
+FROM meal m 
+HAVING PRICE = (SELECT MAX(PRICE) FROM meal m2);
 
 
 Write a query to select all meals that have a price lower than the average price, using HAVING and AVG
@@ -108,9 +110,6 @@ HAVING PRICE < AVERAGE_PRICE;
 
 Write a query to select all meals that have a price lower than the average price and have more than 600 calories
 
-(non esistono piatti con prezzo inferiore al prezzo medio e più di 600 calorie)
-
-SELECT NAME, PRICE, CALORIES, AVG(PRICE) AS AVERAGE_PRICE
-FROM MEAL
-WHERE CALORIES > 600
-HAVING PRICE < AVERAGE_PRICE;
+SELECT *
+from meal m 
+HAVING PRICE < (SELECT AVG(PRICE) from meal m2) and CALORIES > 600;
