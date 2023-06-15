@@ -1,0 +1,57 @@
+LEFT JOINS:
+
+SELECT I.NAME
+from ingredient i
+left join meal m  on M.MEAL_ID = I.MEAL_ID;
+
+----------------
+
+SELECT I.NAME
+from ingredient i
+left join meal m  on M.MEAL_ID = I.MEAL_ID
+where M.MEAL_ID IS NULL;
+
+
+RIGHT JOINS:
+
+SELECT *
+from ingredient i
+RIGHT join meal m on I.MEAL_ID = M.MEAL_ID;
+
+----------------
+
+SELECT *
+from ingredient i
+RIGHT join meal m on I.MEAL_ID = M.MEAL_ID
+where I.MEAL_ID is NULL;
+
+
+INNER JOIN:
+
+SELECT * from ingredient i
+inner join meal m on I.MEAL_ID = M.MEAL_ID;
+
+
+
+----- So che non è richiesto dall'esercizio ma provo a fare anche i full outer -----
+
+
+FULL OUTER JOINS:
+
+select * from ingredient i
+left join MEAL M on I.MEAL_ID = M.MEAL_ID
+union
+select *
+from ingredient i
+RIGHT join meal m on I.MEAL_ID = M.MEAL_ID;
+
+-----------------
+
+select * from ingredient i
+left join MEAL M on I.MEAL_ID = M.MEAL_ID
+where M.MEAL_ID is null
+union
+select *
+from ingredient i
+RIGHT join meal m on I.MEAL_ID = M.MEAL_ID
+where I.MEAL_ID is NULL;
